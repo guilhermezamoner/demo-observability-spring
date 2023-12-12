@@ -1,0 +1,22 @@
+server:
+  port: 8081
+
+spring:
+    application:
+        name: product-service
+
+# All traces should be sent to latency analysis tool
+management:
+    endpoints:
+        web:
+        exposure:
+            include: "*"
+    tracing:
+        sleuth:
+        sampler:
+            probability: 1.0
+        exporter:
+
+logging:
+    pattern:
+        console: "%d{yyyy-MM-dd HH:mm:ss.SSS} %5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}] --- [%15.15t] %-40.40logger{39} : %m%n"
